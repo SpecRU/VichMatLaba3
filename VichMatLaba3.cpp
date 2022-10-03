@@ -4,11 +4,14 @@
 #include <iostream>
 
 double myexp(double x) {
-	double res = 1 + x, fact = 1, xx = x, acc = 333;
+	double res = 1 + x, fact = 1, xx = x, acc = 0.00001, add;
+	int i = 2;
 
-	for (int i = 2; i < acc + 2; ++i) {
-		res += (xx*=x) / (fact *= i);
-	}
+	do {
+		add = (xx*=x) / (fact *= i);
+		res += add;
+		++i;
+	} while (abs(add) > acc);
 
 	return res;
 }
