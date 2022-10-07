@@ -4,7 +4,7 @@
 #include <iostream>
 
 double myexp(double x) {
-	double res = 1 + x, fact = 1, xx = x, acc = 0.00001, add;
+	double res = 1 + x, fact = 1, xx = x, acc = 10 * pow(0.1, 100), add;
 	int i = 2;
 
 	do {
@@ -16,19 +16,21 @@ double myexp(double x) {
 	return res;
 }
 
-double gaussacc = 0.0001, x = 0, gauss;
+double gaussacc = 10 * pow(0.1, 1000), x = -6.23, gauss, tmp, tmp1;
 double sqrt2pi = 1 / sqrt(2 * std::atan(1) * 4);
 
 int main()
 {
 	while (1) {
-		gauss = sqrt2pi * myexp(x*x / 2 * -1);
+		tmp1 = x * x / 2 * -1;
+		tmp = myexp(tmp1);
+		gauss = sqrt2pi * tmp;
 
-		if (gauss <= gaussacc) {
+		if (gaussacc >= gauss) {
 			break;
 		}
 
-		std::cout << gauss << " x=" << x << std::endl;
+		std::cout << gauss << " x=" << x << " exp(" << tmp1 << ")=" << tmp << std::endl;
 
 		x += 0.01;
 	}
